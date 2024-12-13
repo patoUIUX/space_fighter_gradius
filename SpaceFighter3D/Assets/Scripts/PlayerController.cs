@@ -5,23 +5,34 @@ using UnityEngine;
 [System.Serializable]
 public class Boundary
 {
+    //Esta es otra clase pero nos ayuda a determinar los limites en que nuestro player se mueve.
     public float xMin, xMax, zMin, zMax;
 }
 
 public class PlayerController : MonoBehaviour
 {
+    //Esta clase nos ayuda a gestionar a nuestro player, nos ayuda con el movimiento, disparos y limitaciones en las que se movera nuestra nave.
+
+    /*
+     * Aca separe e hice una especie de subtitulos para que en el inspector pudiera verse un poco mas organizado, 
+     * categorice las variables por: movimiento, disparo y audio.
+     */
+
+    //1. Movimiento
     [Header("Movement")]
     public float speed;
     public float tilt;
     public Boundary boundary;
     private Rigidbody rig;
 
+    //2. Disparo
     [Header("Shooting")]
     public GameObject shot;
     public Transform shotSpawn;
     public float fireRate;
     private float nextFire;
 
+    //3. Audio
     private AudioSource audioSource;
 
     void Awake()
@@ -30,6 +41,7 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    //En este Update gestionamos los disparos, se que el update no es lo mas eficiente pero por el momento lo estaba manejando de esta manera.
     void Update()
     {
         if (Input.GetButton("Fire1") && Time.time > nextFire)
@@ -40,6 +52,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*Aca gestionamos el movimiento del player, no solo de izquierda a derecha, al frente y atras,
+    *sino que tambien le dimos una rotacion sutil a nuestra nave para que a futuro el modelo 3D se vea mejor.
+    */
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");

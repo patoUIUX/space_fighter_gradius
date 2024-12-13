@@ -6,6 +6,12 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
+    /*
+     * Esta es la clase principal del juego, donde estaremos manejando los comportamientos centrales: 
+     * generacion de asteroider, control de oleadas y sistema de puntuacion.
+     */
+
+    //Estas variable a continuacion son las que nos ayudan a que haya asteroides y tengan cierto comportamiento.
     public GameObject hazard;
     public Vector3 spawnValues;
     public int hazardCount;
@@ -13,14 +19,17 @@ public class GameController : MonoBehaviour
     public float startWait;
     public float waveWait;
 
+    //Con estas, estaba empezando a estructurar el sistema de puntuacion.
     public TMP_Text scoreText;
     private int score;
 
+    //Con estas, estaba manejando la gestion del estado del juego.
     public TMP_Text restartText;
     public TMP_Text gameOverText;
     private bool restart;
     private bool gameOver;
 
+    //Y por ultimo con esta estaba llevando la cuenta del numero de oleadas.
     private int waveNumber = 0;
 
     void Start()
@@ -35,12 +44,18 @@ public class GameController : MonoBehaviour
         StartCoroutine(SpawnWaves());
     }
 
+    //Con la siguiente corrutina generamos oleadas de obstaculos.
+
+    /* 
+     *Iniciamos en un tiempo definido con el startWait para luego iniciar un bucle (por ahora infinito) que nos indique los numeros de oleadas
+     * Si el estado de Game Over = true, entonces nos muestra texto de re-iniciar.
+     */
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(spawnWait);
         while (true)
         {
-            // Incrementar el número de oleada y mostrar en consola.
+            // Incrementar el número de wave y mostrar en consola (por ahora).
             waveNumber++;
             Debug.Log("Wave number" + waveNumber);
 

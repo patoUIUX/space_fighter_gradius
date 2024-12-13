@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class DestroyByContact : MonoBehaviour
 {
+    //Esta clase gestiona las interacciones entre objetos que tienen un collider con la opcion isTrigger.
+
+    //Estas variables me ayudan con el instanciado de las explosiones
     public GameObject explosion;
     public GameObject playerExplosion;
     public bool explosionInstantiated = false;
 
+    //Con esta variable gestionamos el valor del score.
     public int scoreValue;
+    //Esta variable referencia a nuestra clase GameController.
     private GameController gameController;
 
     void Start()
     {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         gameController = gameControllerObject.GetComponent<GameController>();
-        //GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
     void OnTriggerEnter(Collider other) 
